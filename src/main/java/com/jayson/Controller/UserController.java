@@ -26,38 +26,38 @@ public class UserController extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
-		User student = new User();
-		
-		student.setFirstname(firstname);
-		student.setLastname(lastname);
-		student.setUsername(username);
-		student.setPassword(password);
-		
-		try {
-			
-			int result = userDAO.registerStudent(student);
-			
-			if(result == 1) {
-				request.setAttribute("NOTIFICATION", "User Register Succesfully");
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-		dispatcher.forward(request, response);
+			register(request, response);
 
 	}
 	
 	public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+			String firstname = request.getParameter("firstname");
+			String lastname = request.getParameter("lastname");
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			
+			User student = new User();
+			
+			student.setFirstname(firstname);
+			student.setLastname(lastname);
+			student.setUsername(username);
+			student.setPassword(password);
+			
+			try {
+				
+				int result = userDAO.registerStudent(student);
+				
+				if(result == 1) {
+					request.setAttribute("NOTIFICATION", "User Register Succesfully");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+			dispatcher.forward(request, response);
 		
 	}
 
